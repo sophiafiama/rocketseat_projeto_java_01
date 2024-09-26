@@ -1,6 +1,6 @@
 package br.com.java01.rocketseat_projeto_java_1.dto;
 
-public class CurseDTO {
+public class CourseDTO {
 
     private String name;
     private String category;

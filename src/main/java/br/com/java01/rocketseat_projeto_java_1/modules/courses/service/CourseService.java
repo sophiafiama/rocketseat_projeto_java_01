@@ -1,8 +1,6 @@
 package br.com.java01.rocketseat_projeto_java_1.modules.courses.service;
 
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.exceptions.CourseNotFoundException;
-import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.CreateCourseDTO;

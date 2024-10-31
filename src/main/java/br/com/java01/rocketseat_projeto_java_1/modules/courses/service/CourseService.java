@@ -7,4 +7,6 @@ public interface CourseService {
   Course create(CreateCourseDTO createCourseDTO);
 
   Course getById(Long id);
+
+  void delete(Long id);
 }

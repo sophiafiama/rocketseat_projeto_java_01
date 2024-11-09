@@ -20,15 +20,20 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.DeleteMapping;
+
 import org.springframework.web.bind.annotation.RestController;
+
+import java.util.List;
 
 @RestController
 @RequestMapping("/cursos")
 @Tag(name = "Curso", description = "Informações dos cursos")
 public class CourseController {
 
-  @Autowired
-  private CourseService courseService;
+    @Autowired
+    private CourseService courseService;
 
   @PostMapping
   @Operation(summary = "Cadastro de cursos", description = "Essa função é responsável por cadastrar um novo curso")
@@ -70,6 +75,31 @@ public class CourseController {
         try {
             courseService.delete(id);
             return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
+        } catch (CourseNotFoundException e) {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
+    @GetMapping
+    @Operation(summary = "Obter todos os cursos", description = "Obtem a lista completa de cursos cadastrados")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Lista de cursos obtida com sucesso", content = @Content(schema = @Schema(implementation = Course.class))),
+    })
+    public ResponseEntity<?> getAll() {
+        List<Course> courses = courseService.getAll();
+        return ResponseEntity.ok(courses);
+    }
+
+    @PatchMapping("/{id}/active")
+    @Operation(summary = "Atualizar status do curso", description = "Atualiza o status de ativo de um curso cadastrado, identificado pelo seu ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Status do curso atualizado", content = @Content(schema = @Schema(implementation = Course.class))),
+            @ApiResponse(responseCode = "404", description = "Curso não encontrado", content = @Content)
+    })
+    public ResponseEntity<?> updateStatus(@PathVariable Long id) {
+        try {
+            Course updatedCourse = courseService.toggleStatus(id);
+            return ResponseEntity.ok(updatedCourse);
         } catch (CourseNotFoundException e) {
             return ResponseEntity.notFound().build();
         }

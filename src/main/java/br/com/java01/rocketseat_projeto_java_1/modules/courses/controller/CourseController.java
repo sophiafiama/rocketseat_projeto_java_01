@@ -15,6 +15,7 @@ import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -60,10 +61,10 @@ public class CourseController {
         }
     }
 
-    @GetMapping("/{id}")
-    @Operation(summary = "Deletar curso", description = "Deleta um curso cadastrado, identificado pelo seu ID")
+    @DeleteMapping("/{id}")
+    @Operation(summary = "Remover curso", description = "Remove um curso cadastrado, identificado pelo seu ID")
     @ApiResponses({
-        @ApiResponse(responseCode = "204", description = "Curso deletado", content = @Content),
+        @ApiResponse(responseCode = "204", description = "Curso removido", content = @Content),
         @ApiResponse(responseCode = "404", description = "Curso não encontrado", content = @Content)
     })
     public ResponseEntity<?> delete(@PathVariable @Min(1) @Valid Long id) {

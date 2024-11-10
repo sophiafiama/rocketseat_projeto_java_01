@@ -7,11 +7,11 @@ import org.springframework.context.annotation.Configuration;
 
 @Configuration
 public class SwaggerConfig {
-    @Bean
-    public OpenAPI openAPI() {
-        return new OpenAPI()
-                .info(new Info().title("Courses API")
-                        .description("API responsável pelo gerenciamento de cursos")
-                        .version("1"));
-    }
+  @Bean
+  public OpenAPI openAPI() {
+    return new OpenAPI()
+        .info(new Info().title("Courses API")
+            .description("API responsável pelo gerenciamento de cursos")
+            .version("1"));
+  }
 }

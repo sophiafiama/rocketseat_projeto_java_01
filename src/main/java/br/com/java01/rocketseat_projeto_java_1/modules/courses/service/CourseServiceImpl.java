@@ -12,8 +12,8 @@ import java.util.Optional;
 @Service
 public class CourseServiceImpl implements CourseService {
 
-  @Autowired
-  private CourseRepository courseRepository;
+    @Autowired
+    private CourseRepository courseRepository;
 
   @Override
   public Course create(CreateCourseDTO createCourseDTO) {
@@ -23,8 +23,8 @@ public class CourseServiceImpl implements CourseService {
         .active(createCourseDTO.isActive())
         .build();
 
-    return courseRepository.save(course);
-  }
+        return courseRepository.save(course);
+    }
 
   @Override
   public Course getById(Long id) {
@@ -33,6 +33,13 @@ public class CourseServiceImpl implements CourseService {
       throw new CourseNotFoundException();
     }
 
-    return course.get();
-  }
+        return course.get();
+    }
+
+    @Override
+    public void delete(Long id) {
+        Course course = getById(id);
+        courseRepository.delete(course);
+    }
 }
+

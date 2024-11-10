@@ -1,5 +1,7 @@
 package br.com.java01.rocketseat_projeto_java_1.modules.courses.exceptions;
 
+import br.com.java01.rocketseat_projeto_java_1.exceptions.NotFoundException;
+
 import java.io.Serial;
 
 /**

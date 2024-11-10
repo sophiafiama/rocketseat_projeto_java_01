@@ -1,4 +1,4 @@
-package br.com.java01.rocketseat_projeto_java_1.modules.courses.exceptions;
+package br.com.java01.rocketseat_projeto_java_1.exceptions;
 
 import static org.springframework.http.HttpStatus.NOT_FOUND;
 

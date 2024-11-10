@@ -91,7 +91,7 @@ public class CourseController {
     }
 
     @PatchMapping("/{id}/active")
-    @Operation(summary = "Atualizar status do curso", description = "Atualiza o status de ativo de um curso cadastrado, identificado pelo seu ID")
+    @Operation(summary = "Atualizar status do curso", description = "Atualiza o status de um curso cadastrado identificado pelo seu ID, para ativo se estiver inativo, e para inativo se estiver ativo")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Status do curso atualizado", content = @Content(schema = @Schema(implementation = Course.class))),
             @ApiResponse(responseCode = "404", description = "Curso não encontrado", content = @Content)

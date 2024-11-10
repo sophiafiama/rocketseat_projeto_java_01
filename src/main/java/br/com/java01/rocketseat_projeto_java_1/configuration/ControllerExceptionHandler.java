@@ -2,13 +2,10 @@ package br.com.java01.rocketseat_projeto_java_1.configuration;
 
 import static java.util.stream.Collectors.joining;
 import static org.springframework.http.HttpStatus.BAD_REQUEST;
-import static org.springframework.http.HttpStatus.INTERNAL_SERVER_ERROR;
 
-import br.com.java01.rocketseat_projeto_java_1.modules.courses.exceptions.ApiError;
-import br.com.java01.rocketseat_projeto_java_1.modules.courses.exceptions.ApiException;
+import br.com.java01.rocketseat_projeto_java_1.exceptions.ApiError;
+import br.com.java01.rocketseat_projeto_java_1.exceptions.ApiException;
 import jakarta.servlet.http.HttpServletRequest;
-import java.nio.charset.StandardCharsets;
-import java.util.Enumeration;
 import java.util.Map;
 import java.util.concurrent.ConcurrentHashMap;
 import lombok.extern.slf4j.Slf4j;
@@ -18,14 +15,11 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
-import org.springframework.web.servlet.NoHandlerFoundException;
 
 @ControllerAdvice
 @Slf4j
 public class ControllerExceptionHandler {
     private static final String semicolon = "; ";
-
 
     private String extractParameters(HttpServletRequest request) {
         Map<String, String[]> paramMap = request.getParameterMap();
@@ -64,5 +58,38 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(apiError.status()).body(apiError);
     }
 
+    /**
+     * Handles MethodArgumentNotValidException exceptions and constructs a detailed error response.
+     *
+     * @param ex the MethodArgumentNotValidException thrown when validation fails
+     * @param request the HttpServletRequest containing the request details
+     * @return a ResponseEntity containing an ApiError with details about the validation errors
+     */
+    @ExceptionHandler(MethodArgumentNotValidException.class)
+    protected ResponseEntity<ApiError> handleValidationExceptions(
+            MethodArgumentNotValidException ex, HttpServletRequest request) {
+        String requestParams = extractParameters(request);
+        String requestUrl = request.getRequestURL().toString();
+
+        Map<String, String> errors = new ConcurrentHashMap<>();
+        ex.getBindingResult()
+                .getAllErrors()
+                .forEach(
+                        (error) -> {
+                            String fieldName = ((FieldError) error).getField();
+                            String errorMessage = error.getDefaultMessage();
+                            errors.put(fieldName, errorMessage);
+                        });
+
+        String message = errors.entrySet().stream()
+                .map(entry -> "Field '%s' error: %s".formatted(entry.getKey(), entry.getValue()))
+                .collect(joining(semicolon));
+
+        log.warn("[Validation error] URL: {} Parameters: {}",
+                requestUrl, requestParams);
+
+        ApiError apiError = new ApiError("field_valid_error", message, BAD_REQUEST.value());
+        return ResponseEntity.status(apiError.status()).body(apiError);
+    }
 
 }

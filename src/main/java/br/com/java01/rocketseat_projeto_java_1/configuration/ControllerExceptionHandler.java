@@ -15,6 +15,7 @@ import org.springframework.validation.FieldError;
 import org.springframework.web.bind.MethodArgumentNotValidException;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
+import org.springframework.web.method.annotation.MethodArgumentTypeMismatchException;
 
 @ControllerAdvice
 @Slf4j
@@ -59,11 +60,14 @@ public class ControllerExceptionHandler {
     }
 
     /**
-     * Handles MethodArgumentNotValidException exceptions and constructs a detailed error response.
+     * Handles MethodArgumentNotValidException exceptions and constructs a detailed
+     * error response.
      *
-     * @param ex the MethodArgumentNotValidException thrown when validation fails
+     * @param ex      the MethodArgumentNotValidException thrown when validation
+     *                fails
      * @param request the HttpServletRequest containing the request details
-     * @return a ResponseEntity containing an ApiError with details about the validation errors
+     * @return a ResponseEntity containing an ApiError with details about the
+     *         validation errors
      */
     @ExceptionHandler(MethodArgumentNotValidException.class)
     protected ResponseEntity<ApiError> handleValidationExceptions(
@@ -92,4 +96,28 @@ public class ControllerExceptionHandler {
         return ResponseEntity.status(apiError.status()).body(apiError);
     }
 
+    /**
+     * Handler for method argument type mismatches, such as invalid enum constants.
+     *
+     * @param ex      the exception thrown when method argument type mismatch
+     *                occurs.
+     * @param request the HttpServletRequest that resulted in the exception
+     * @return {@link ResponseEntity} with BAD_REQUEST status indicating an invalid
+     *         input.
+     */
+    @ExceptionHandler(MethodArgumentTypeMismatchException.class)
+    public ResponseEntity<ApiError> handleMethodArgumentTypeMismatchException(
+            MethodArgumentTypeMismatchException ex, HttpServletRequest request) {
+        String requestParams = extractParameters(request);
+        String requestUrl = request.getRequestURL().toString();
+
+        log.warn("[Argument type mismatch] URL: {} Parameters: {}",
+                requestUrl, requestParams);
+
+        String message = String.format("Invalid value for path variable '%s': %s",
+                ex.getName(), ex.getValue());
+
+        ApiError apiError = new ApiError("invalid_argument_type", message, BAD_REQUEST.value());
+        return ResponseEntity.status(apiError.status()).body(apiError);
+    }
 }

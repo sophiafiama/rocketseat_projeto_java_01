@@ -53,7 +53,6 @@ Criar Curso
   "category": "Categoria do Curso",
   "active": true
 }
-<<<<<<< HEAD
 ````
 
 Obter Todos os Cursos

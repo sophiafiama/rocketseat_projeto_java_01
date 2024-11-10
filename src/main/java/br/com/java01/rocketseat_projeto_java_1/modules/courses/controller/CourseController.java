@@ -24,7 +24,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/cursos")
-@Tag(name = "Curso", description = "Informações dos cursos")
+@Tag(name = "Curso", description = "Informações sobre os cursos")
 public class CourseController {
 
   @Autowired
@@ -44,7 +44,7 @@ public class CourseController {
   }
 
   @GetMapping("/{id}")
-  @Operation(summary = "Obter curso", description = "Obtem um curso cadastrado, buscando pelo seu ID")
+  @Operation(summary = "Obter curso", description = "Obtém um curso cadastrado, buscando pelo seu ID")
   @ApiResponses({
       @ApiResponse(responseCode = "200", description = "Curso encontrado", content = @Content(
           schema = @Schema(implementation = Course.class))

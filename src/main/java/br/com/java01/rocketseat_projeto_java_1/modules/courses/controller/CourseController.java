@@ -25,7 +25,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 @RestController
 @RequestMapping("/cursos")
-@Tag(name = "Curso", description = "Informações dos cursos")
+@Tag(name = "Curso", description = "Informações sobre os cursos")
 public class CourseController {
 
   @Autowired
@@ -44,22 +44,22 @@ public class CourseController {
     return new ResponseEntity<>(createdCourse, HttpStatus.CREATED);
   }
 
-    @GetMapping("/{id}")
-    @Operation(summary = "Obter curso", description = "Obtem um curso cadastrado, buscando pelo seu ID")
-    @ApiResponses({
-        @ApiResponse(responseCode = "200", description = "Curso encontrado", content = @Content(
-            schema = @Schema(implementation = Course.class))
-        ),
-        @ApiResponse(responseCode = "404", description = "Curso não encontrado", content = @Content)
-    })
-    public ResponseEntity<?> getCourseById(@PathVariable @Min(1) @Valid Long id) {
-        try {
-            Course course = courseService.getById(id);
-            return ResponseEntity.ok(course);
-        } catch (CourseNotFoundException e) {
-            return ResponseEntity.notFound().build();
-        }
+  @GetMapping("/{id}")
+  @Operation(summary = "Obter curso", description = "Obtém um curso cadastrado, buscando pelo seu ID")
+  @ApiResponses({
+      @ApiResponse(responseCode = "200", description = "Curso encontrado", content = @Content(
+          schema = @Schema(implementation = Course.class))
+      ),
+      @ApiResponse(responseCode = "404", description = "Curso não encontrado", content = @Content)
+  })
+  public ResponseEntity<?> getCourseById(@PathVariable @Min(1) @Valid Long id) {
+    try {
+      Course course = courseService.getById(id);
+      return ResponseEntity.ok(course);
+    } catch (CourseNotFoundException e) {
+      return ResponseEntity.notFound().build();
     }
+  }
 
     @DeleteMapping("/{id}")
     @Operation(summary = "Remover curso", description = "Remove um curso cadastrado, identificado pelo seu ID")

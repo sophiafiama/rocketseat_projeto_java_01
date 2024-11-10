@@ -1,17 +1,17 @@
 package br.com.java01.rocketseat_projeto_java_1.modules.courses.dto;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import jakarta.validation.constraints.NotEmpty;
 import lombok.Builder;
-import lombok.Data;
 
-@Data
 @Builder
-public class CreateCourseDTO {
-    @NotEmpty
-    private String name;
+public record CreateCourseDTO(
+        @JsonProperty("name")
+        @NotEmpty(message = "O nome do curso é obrigatório")
+        String name,
+        @JsonProperty("category")
+        @NotEmpty(message = "A categoria do curso é obrigatória")
+        String category
+) {
 
-    @NotEmpty
-    private String category;
-
-    private boolean active;
 }

@@ -9,6 +9,7 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -31,6 +32,7 @@ public class CourseController {
   private CourseService courseService;
 
   @PostMapping
+  @SecurityRequirement(name = "jwt_auth")
   @Operation(summary = "Cadastro de cursos", description = "Essa função é responsável por cadastrar um novo curso")
   @ApiResponses({
       @ApiResponse(responseCode = "201", description = "Curso cadastrado com sucesso", content = @Content(
@@ -44,6 +46,7 @@ public class CourseController {
   }
 
   @GetMapping("/{id}")
+  @SecurityRequirement(name = "jwt_auth")
   @Operation(summary = "Obter curso", description = "Obtém um curso cadastrado, buscando pelo seu ID")
   @ApiResponses({
       @ApiResponse(responseCode = "200", description = "Curso encontrado", content = @Content(

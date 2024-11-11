@@ -31,7 +31,7 @@ import java.time.Instant;
 
 @RestController
 @RequestMapping("/auth")
-@Tag(name = "Auth", description = "Autentica")
+@Tag(name = "Auth", description = "Autenticação")
 public class AuthController {
     @Value("${auth.security.token.secret}")
     private String secretKey;

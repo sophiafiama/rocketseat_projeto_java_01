@@ -1,15 +1,19 @@
 package br.com.java01.rocketseat_projeto_java_1.modules.courses.service;
 
-import br.com.java01.rocketseat_projeto_java_1.modules.courses.exceptions.CourseNotFoundException;
-import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Service;
+import static br.com.java01.rocketseat_projeto_java_1.utils.PaginationUtils.sortBy;
+
+import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.CourseFilterDTO;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.CreateCourseDTO;
+import br.com.java01.rocketseat_projeto_java_1.modules.courses.exceptions.CourseNotFoundException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
+import org.springframework.data.domain.ExampleMatcher;
+import org.springframework.stereotype.Service;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.model.Course;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.repository.CourseRepository;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
-import java.util.Optional;
 
 @Service
 public class CourseServiceImpl implements CourseService {
@@ -20,9 +24,9 @@ public class CourseServiceImpl implements CourseService {
   @Override
   public Course create(CreateCourseDTO createCourseDTO) {
     var course = Course.builder()
-        .name(createCourseDTO.getName())
-        .category(createCourseDTO.getCategory())
-        .active(createCourseDTO.isActive())
+        .name(createCourseDTO.name())
+        .category(createCourseDTO.category())
+        .active(true)
         .build();
 
     return courseRepository.save(course);
@@ -30,12 +34,10 @@ public class CourseServiceImpl implements CourseService {
 
   @Override
   public Course getById(Long id) {
-    Optional<Course> course = courseRepository.findById(id);
-    if (course.isEmpty()) {
-      throw new CourseNotFoundException();
-    }
+    Course course = courseRepository.findById(id)
+        .orElseThrow(() -> new CourseNotFoundException(id));
 
-    return course.get();
+    return course;
   }
 
   @Override
@@ -50,8 +52,20 @@ public class CourseServiceImpl implements CourseService {
     return courseRepository.save(course);
   }
 
-  public List<Course> getAll() {
-    return courseRepository.findAll();
+  public List<Course> getAll(CourseFilterDTO filter) {
+    Sort sort = sortBy(filter.sortBy(), filter.sortOrder());
+
+    Course courseExample = new Course();
+    courseExample.setName(filter.name());
+    courseExample.setCategory(filter.category());
+
+    ExampleMatcher matcher = ExampleMatcher.matchingAll()
+        .withIgnoreNullValues()
+        .withStringMatcher(ExampleMatcher.StringMatcher.CONTAINING); // busca parcial (contém)
+
+    Example<Course> example = Example.of(courseExample, matcher);
+
+    return courseRepository.findAll(example, sort);
   }
 
 }

@@ -2,6 +2,7 @@ package br.com.java01.rocketseat_projeto_java_1.modules.courses.service;
 
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.CourseFilterDTO;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.CreateCourseDTO;
+import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.UpdateCourseDTO;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.model.Course;
 import jakarta.validation.Valid;
 
@@ -18,6 +19,6 @@ public interface CourseService {
 
   List<Course> getAll(CourseFilterDTO filter);
 
-    Course update(Long id, CreateCourseDTO createCourseDTO);
+  Course update(Long id, UpdateCourseDTO updateCourseDTO);
 }
 

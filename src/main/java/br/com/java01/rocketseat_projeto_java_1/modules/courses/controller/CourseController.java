@@ -2,6 +2,7 @@ package br.com.java01.rocketseat_projeto_java_1.modules.courses.controller;
 
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.CourseFilterDTO;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.CreateCourseDTO;
+import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.UpdateCourseDTO;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.model.Course;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.service.CourseService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -97,8 +98,8 @@ public class CourseController {
             @ApiResponse(responseCode = "200", description = "Curso atualizado", content = @Content(schema = @Schema(implementation = Course.class))),
             @ApiResponse(responseCode = "404", description = "Curso não encontrado", content = @Content)
     })
-    public ResponseEntity<?> updateCourse(@PathVariable Long id, @Valid @RequestBody CreateCourseDTO createCourseDTO) {
-        Course updatedCourse = courseService.update(id, createCourseDTO);
+    public ResponseEntity<?> updateCourse(@PathVariable Long id, @Valid @RequestBody UpdateCourseDTO updateCourseDTO) {
+        Course updatedCourse = courseService.update(id, updateCourseDTO);
         return ResponseEntity.ok(updatedCourse);
     }
 

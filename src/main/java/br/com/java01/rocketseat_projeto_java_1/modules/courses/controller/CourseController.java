@@ -15,7 +15,6 @@ import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,6 +23,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
@@ -90,4 +90,17 @@ public class CourseController {
         Course updatedCourse = courseService.toggleStatus(id);
         return ResponseEntity.ok(updatedCourse);
     }
+
+    @PutMapping("/{id}")
+    @Operation(summary = "Atualizar curso", description = "Atualiza as informações de um curso cadastrado, identificado pelo seu ID")
+    @ApiResponses({
+            @ApiResponse(responseCode = "200", description = "Curso atualizado", content = @Content(schema = @Schema(implementation = Course.class))),
+            @ApiResponse(responseCode = "404", description = "Curso não encontrado", content = @Content)
+    })
+    public ResponseEntity<?> updateCourse(@PathVariable Long id, @Valid @RequestBody CreateCourseDTO createCourseDTO) {
+        Course updatedCourse = courseService.update(id, createCourseDTO);
+        return ResponseEntity.ok(updatedCourse);
+    }
+
+
 }

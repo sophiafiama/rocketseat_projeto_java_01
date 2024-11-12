@@ -68,4 +68,11 @@ public class CourseServiceImpl implements CourseService {
     return courseRepository.findAll(example, sort);
   }
 
+  public Course update(Long id, CreateCourseDTO createCourseDTO) {
+    Course course = getById(id);
+    course.setName(createCourseDTO.name());
+    course.setCategory(createCourseDTO.category());
+    return courseRepository.save(course);
+  }
+
 }

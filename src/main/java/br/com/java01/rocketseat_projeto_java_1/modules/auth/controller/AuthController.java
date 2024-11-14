@@ -71,7 +71,7 @@ public class AuthController {
     })
     public ResponseEntity<?> auth(@RequestBody AuthRequestDTO authRequestDTO) {
         try {
-            var token = authenticate(authRequestDTO);
+            var token = authService.authenticate(authRequestDTO);
 
             return ResponseEntity.ok().body(token);
         } catch (Exception e) {

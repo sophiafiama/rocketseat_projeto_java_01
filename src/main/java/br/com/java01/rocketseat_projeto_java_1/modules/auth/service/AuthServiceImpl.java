@@ -17,7 +17,7 @@ import java.time.Duration;
 import java.time.Instant;
 
 @Service
-public class AuthServiceImpl {
+public class AuthServiceImpl implements AuthService {
     @Value("${auth.security.token.secret}")
     private String secretKey;
 

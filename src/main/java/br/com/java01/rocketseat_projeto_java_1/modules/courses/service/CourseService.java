@@ -4,9 +4,6 @@ import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.CourseFilterD
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.CreateCourseDTO;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.UpdateCourseDTO;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.model.Course;
-import jakarta.validation.Valid;
-
-import java.util.List;
 
 import java.util.List;
 
@@ -20,5 +17,7 @@ public interface CourseService {
   Course toggleStatus(Long id);
 
   List<Course> getAll(CourseFilterDTO filter);
+
+  Course update(Long id, UpdateCourseDTO updateCourseDTO);
 }
 

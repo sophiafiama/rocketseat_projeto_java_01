@@ -1,5 +1,6 @@
 package br.com.java01.rocketseat_projeto_java_1.modules.courses.service;
 
+import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.CourseFilterDTO;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.CreateCourseDTO;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.model.Course;
 
@@ -14,5 +15,5 @@ public interface CourseService {
 
   Course toggleStatus(Long id);
 
-  List<Course> getAll();
+  List<Course> getAll(CourseFilterDTO filter);
 }

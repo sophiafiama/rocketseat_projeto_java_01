@@ -5,6 +5,7 @@ import static br.com.java01.rocketseat_projeto_java_1.utils.PaginationUtils.sort
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.CourseFilterDTO;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.CreateCourseDTO;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.exceptions.CourseNotFoundException;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;

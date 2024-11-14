@@ -2,7 +2,6 @@ package br.com.java01.rocketseat_projeto_java_1.modules.courses.controller;
 
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.CourseFilterDTO;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.CreateCourseDTO;
-import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.UpdateCourseDTO;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.model.Course;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.service.CourseService;
 import io.swagger.v3.oas.annotations.Operation;
@@ -10,12 +9,14 @@ import io.swagger.v3.oas.annotations.media.Content;
 import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
+import io.swagger.v3.oas.annotations.security.SecurityRequirement;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -24,7 +25,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.PatchMapping;
-import org.springframework.web.bind.annotation.PutMapping;
 
 import org.springframework.web.bind.annotation.RestController;
 
@@ -39,6 +39,7 @@ public class CourseController {
     private CourseService courseService;
 
     @PostMapping
+    @SecurityRequirement(name = "jwt_auth")
     @Operation(summary = "Cadastro de cursos", description = "Essa função é responsável por cadastrar um novo curso")
     @ApiResponses({
             @ApiResponse(responseCode = "201", description = "Curso cadastrado com sucesso", content = @Content(schema = @Schema(implementation = Course.class))),
@@ -50,6 +51,7 @@ public class CourseController {
     }
 
     @GetMapping("/{id}")
+    @SecurityRequirement(name = "jwt_auth")
     @Operation(summary = "Obter curso", description = "Obtém um curso cadastrado, buscando pelo seu ID")
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Curso encontrado", content = @Content(schema = @Schema(implementation = Course.class))),
@@ -66,6 +68,7 @@ public class CourseController {
             @ApiResponse(responseCode = "204", description = "Curso removido", content = @Content),
             @ApiResponse(responseCode = "404", description = "Curso não encontrado", content = @Content)
     })
+    @SecurityRequirement(name = "jwt_auth")
     public ResponseEntity<?> delete(@PathVariable @Min(1) @Valid Long id) {
         courseService.delete(id);
         return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
@@ -76,6 +79,7 @@ public class CourseController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Lista de cursos obtida com sucesso", content = @Content(schema = @Schema(implementation = Course.class))),
     })
+    @SecurityRequirement(name = "jwt_auth")
     public ResponseEntity<?> getAll(@ModelAttribute CourseFilterDTO filter) {
         List<Course> courses = courseService.getAll(filter);
         return ResponseEntity.ok(courses);
@@ -87,21 +91,9 @@ public class CourseController {
             @ApiResponse(responseCode = "200", description = "Status do curso atualizado", content = @Content(schema = @Schema(implementation = Course.class))),
             @ApiResponse(responseCode = "404", description = "Curso não encontrado", content = @Content)
     })
+    @SecurityRequirement(name = "jwt_auth")
     public ResponseEntity<?> updateStatus(@PathVariable Long id) {
         Course updatedCourse = courseService.toggleStatus(id);
         return ResponseEntity.ok(updatedCourse);
     }
-
-    @PutMapping("/{id}")
-    @Operation(summary = "Atualizar curso", description = "Atualiza as informações de um curso cadastrado, identificado pelo seu ID")
-    @ApiResponses({
-            @ApiResponse(responseCode = "200", description = "Curso atualizado", content = @Content(schema = @Schema(implementation = Course.class))),
-            @ApiResponse(responseCode = "404", description = "Curso não encontrado", content = @Content)
-    })
-    public ResponseEntity<?> updateCourse(@PathVariable Long id, @Valid @RequestBody UpdateCourseDTO updateCourseDTO) {
-        Course updatedCourse = courseService.update(id, updateCourseDTO);
-        return ResponseEntity.ok(updatedCourse);
-    }
-
-
 }

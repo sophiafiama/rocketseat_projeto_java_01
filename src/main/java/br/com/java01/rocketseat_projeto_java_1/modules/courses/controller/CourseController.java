@@ -68,6 +68,7 @@ public class CourseController {
             @ApiResponse(responseCode = "204", description = "Curso removido", content = @Content),
             @ApiResponse(responseCode = "404", description = "Curso não encontrado", content = @Content)
     })
+    @SecurityRequirement(name = "jwt_auth")
     public ResponseEntity<?> delete(@PathVariable @Min(1) @Valid Long id) {
         courseService.delete(id);
         return new ResponseEntity<>("", HttpStatus.NO_CONTENT);
@@ -78,6 +79,7 @@ public class CourseController {
     @ApiResponses({
             @ApiResponse(responseCode = "200", description = "Lista de cursos obtida com sucesso", content = @Content(schema = @Schema(implementation = Course.class))),
     })
+    @SecurityRequirement(name = "jwt_auth")
     public ResponseEntity<?> getAll(@ModelAttribute CourseFilterDTO filter) {
         List<Course> courses = courseService.getAll(filter);
         return ResponseEntity.ok(courses);
@@ -89,6 +91,7 @@ public class CourseController {
             @ApiResponse(responseCode = "200", description = "Status do curso atualizado", content = @Content(schema = @Schema(implementation = Course.class))),
             @ApiResponse(responseCode = "404", description = "Curso não encontrado", content = @Content)
     })
+    @SecurityRequirement(name = "jwt_auth")
     public ResponseEntity<?> updateStatus(@PathVariable Long id) {
         Course updatedCourse = courseService.toggleStatus(id);
         return ResponseEntity.ok(updatedCourse);

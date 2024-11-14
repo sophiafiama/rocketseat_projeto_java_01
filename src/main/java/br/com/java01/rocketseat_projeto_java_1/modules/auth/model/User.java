@@ -1,4 +1,4 @@
-package br.com.java01.rocketseat_projeto_java_1.modules.courses.model;
+package br.com.java01.rocketseat_projeto_java_1.modules.auth.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
@@ -8,9 +8,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.data.annotation.CreatedDate;
-
-import java.time.LocalDateTime;
 
 @Data
 @Builder

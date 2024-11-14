@@ -1,12 +1,10 @@
-package br.com.java01.rocketseat_projeto_java_1.modules.courses.dto;
+package br.com.java01.rocketseat_projeto_java_1.modules.auth.dto;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import java.util.List;
 
 @Data
 @Builder

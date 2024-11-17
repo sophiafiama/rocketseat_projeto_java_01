@@ -3,6 +3,18 @@
 
 Este é um projeto de API fictícia para uma empresa de cursos de programação. A API permite gerenciar informações sobre cursos, incluindo operações de criação, atualização, remoção e consulta.
 
+### Team
+
+Time de desenvolvedores formado pelo Mercado Livre e a Rocketseat para a criação e apresentação de projeto sobre o treinamento Java (Wave 2 | 2024).
+
+| <p align="center">Nome</p>  | <p align="center">LinkedIn</p>  | <p align="center">Slack</p> | <p align="center">BU</p> |
+|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
+| <p align="center">Daniela Beleze Karasawa</p>         | <p align="center">[<img src = "src/assets/img/logo_linkedin.svg" alt="linkend" width="10%"/>](https://www.linkedin.com/in/danielakarasawa)</p> | <p align="center">[<img src = "src/assets/img/logo_slack.svg" alt="slack" width="10%"/>](https://meli.enterprise.slack.com/team/UTKTT9ZQQ)</p>   | <p align="center">[<img src = "src/assets/img/m_envios.png" alt="mercado envios" width="100%"/>](http://www.mercadolivre.com.br)</p>     |
+| <p align="center">Felipe dos Santos Geroldi</p>      | <p align="center">[<img src = "src/assets/img/logo_linkedin.svg" alt="linkend" width="10%"/>](https://www.linkedin.com/in/felipe-geroldi/)</p> | <p align="center">[<img src = "src/assets/img/logo_slack.svg" alt="slack" width="10%"/>](https://meli.enterprise.slack.com/team/U06Q43CQ5KN)</p> | <p align="center">[<img src = "src/assets/img/m_marketplace.png" alt="mercado livre" width="100%"/>](http://www.mercadolivre.com.br)</p> |
+| <p align="center">Sophia Fiama da Silva</p>         | <p align="center">[<img src = "src/assets/img/logo_linkedin.svg" alt="linkend" width="10%"/>](https://www.linkedin.com/in/sophiafiama/)</p>    | <p align="center">[<img src = "src/assets/img/logo_slack.svg" alt="slack" width="10%"/>](https://meli.enterprise.slack.com/team/U03PXBS6T98)</p> | <p align="center">[<img src = "src/assets/img/m_pago.png" alt="mercado pago" width="100%"/>](http://www.mercadopago.com.br)</p>          |
+| <p align="center">Tayna Alves Rodrigues</p>        | <p align="center">[<img src = "src/assets/img/logo_linkedin.svg" alt="linkend" width="10%"/>](https://www.linkedin.com/in/oituty/)</p>         | <p align="center">[<img src = "src/assets/img/logo_slack.svg" alt="slack" width="10%"/>](https://meli.enterprise.slack.com/team/U06PV0E0T0W)</p> | <p align="center">[<img src = "src/assets/img/m_marketplace.png" alt="mercado livre" width="100%"/>](http://www.mercadolivre.com.br)</p> |
+| <p align="center">Vinicius Ventura de Andrade</p>  | <p align="center">[<img src = "src/assets/img/logo_linkedin.svg" alt="linkend" width="10%"/>](https://www.linkedin.com/in/vini-ventura29/)</p> | <p align="center">[<img src = "src/assets/img/logo_slack.svg" alt="slack" width="10%"/>](https://meli.enterprise.slack.com/team/U06PV004UDC)</p> | <p align="center">[<img src = "src/assets/img/m_marketplace.png" alt="mercado livre" width="100%"/>](http://www.mercadolivre.com.br)</p> |
+
 ## Tecnologias Utilizadas
 
 - Java 17
@@ -77,18 +89,3 @@ Remover Curso
 
 ### Documentação da API
 A documentação da API está disponível em http://localhost:8080/swagger-ui.html.
-
-
-### Team
-
-Time de desenvolvedores formado pelo Mercado Livre e a Rocketseat para a criação e apresentação de projeto sobre o treinamento Java (Wave 2 | 2024).
-
-| <p align="center">Nome</p>  | <p align="center">LinkedIn</p>  | <p align="center">Slack</p> | <p align="center">BU</p> |
-|-----------------------------|------------------------------------------------------------------------------------------------------------------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------|------------------------------------------------------------------------------------------------------------------------------------|
-| <p align="center">Daniela Beleze Karasawa</p>         | <p align="center">[<img src = "src/assets/img/logo_linkedin.svg" alt="linkend" width="10%"/>](https://www.linkedin.com/in/danielakarasawa)</p> | <p align="center">[<img src = "src/assets/img/logo_slack.svg" alt="slack" width="10%"/>](https://meli.enterprise.slack.com/team/UTKTT9ZQQ)</p>   | <p align="center">[<img src = "src/assets/img/m_envios.png" alt="mercado envios" width="100%"/>](http://www.mercadolivre.com.br)</p>     |
-| <p align="center">Felipe dos Santos Geroldi</p>      | <p align="center">[<img src = "src/assets/img/logo_linkedin.svg" alt="linkend" width="10%"/>](https://www.linkedin.com/in/felipe-geroldi/)</p> | <p align="center">[<img src = "src/assets/img/logo_slack.svg" alt="slack" width="10%"/>](https://meli.enterprise.slack.com/team/U06Q43CQ5KN)</p> | <p align="center">[<img src = "src/assets/img/m_marketplace.png" alt="mercado livre" width="100%"/>](http://www.mercadolivre.com.br)</p> |
-| <p align="center">Sophia Fiama da Silva</p>         | <p align="center">[<img src = "src/assets/img/logo_linkedin.svg" alt="linkend" width="10%"/>](https://www.linkedin.com/in/sophiafiama/)</p>    | <p align="center">[<img src = "src/assets/img/logo_slack.svg" alt="slack" width="10%"/>](https://meli.enterprise.slack.com/team/U03PXBS6T98)</p> | <p align="center">[<img src = "src/assets/img/m_pago.png" alt="mercado pago" width="100%"/>](http://www.mercadopago.com.br)</p>          |
-| <p align="center">Tayna Alves Rodrigues</p>        | <p align="center">[<img src = "src/assets/img/logo_linkedin.svg" alt="linkend" width="10%"/>](https://www.linkedin.com/in/oituty/)</p>         | <p align="center">[<img src = "src/assets/img/logo_slack.svg" alt="slack" width="10%"/>](https://meli.enterprise.slack.com/team/U06PV0E0T0W)</p> | <p align="center">[<img src = "src/assets/img/m_marketplace.png" alt="mercado livre" width="100%"/>](http://www.mercadolivre.com.br)</p> |
-| <p align="center">Vinicius Ventura de Andrade</p>  | <p align="center">[<img src = "src/assets/img/logo_linkedin.svg" alt="linkend" width="10%"/>](https://www.linkedin.com/in/vini-ventura29/)</p> | <p align="center">[<img src = "src/assets/img/logo_slack.svg" alt="slack" width="10%"/>](https://meli.enterprise.slack.com/team/U06PV004UDC)</p> | <p align="center">[<img src = "src/assets/img/m_marketplace.png" alt="mercado livre" width="100%"/>](http://www.mercadolivre.com.br)</p> |
-
-

@@ -4,8 +4,8 @@ import static br.com.java01.rocketseat_projeto_java_1.utils.PaginationUtils.sort
 
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.CourseFilterDTO;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.CreateCourseDTO;
+import br.com.java01.rocketseat_projeto_java_1.modules.courses.dto.UpdateCourseDTO;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.exceptions.CourseNotFoundException;
-import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -14,6 +14,7 @@ import br.com.java01.rocketseat_projeto_java_1.modules.courses.model.Course;
 import br.com.java01.rocketseat_projeto_java_1.modules.courses.repository.CourseRepository;
 import org.springframework.data.domain.Sort;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -67,6 +68,22 @@ public class CourseServiceImpl implements CourseService {
     Example<Course> example = Example.of(courseExample, matcher);
 
     return courseRepository.findAll(example, sort);
+  }
+
+  @Override
+  public Course update(Long id, UpdateCourseDTO updateCourseDTO) {
+    Course course = courseRepository.findById(id)
+        .orElseThrow(() -> new CourseNotFoundException(id));
+
+    if (updateCourseDTO.name() != null && !updateCourseDTO.name().isEmpty()) {
+      course.setName(updateCourseDTO.name());
+    }
+    if (updateCourseDTO.category() != null && !updateCourseDTO.category().isEmpty()) {
+      course.setCategory(updateCourseDTO.category());
+    }
+    course.setUpdatedAt(LocalDateTime.now());
+
+    return courseRepository.save(course);
   }
 
 }
